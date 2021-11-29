@@ -1,19 +1,25 @@
 import React from 'react'
+import { Redirect, useHistory } from 'react-router';
 
 const AddContact = () => {
 
-    const state = {
+    state = {
         name: "",
         email: ""
     }
 
-    const add = (e) => {
+    const history = useHistory();
+
+    add = (e) => {
         e.preventDefault();
         if (this.state.name === "" && this.state.email === "") {
             alert("All fields are mandatory");
             return
         }
-        console.log(this.state);
+        this.props.addContactHandler(this.state);
+        this.setState({name: "", email: ""});
+        history.push("/");
+        // console.log(this.state);
     }
 
     return (
@@ -36,6 +42,6 @@ const AddContact = () => {
             </form>
         </div>
     )
-}
+};
 
-export default AddContact
+export default AddContact;

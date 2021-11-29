@@ -1,21 +1,24 @@
-import React from 'react'
+import React from 'react';
+import { withRouter } from 'react-router';
 
 class AddContact extends React.Component {
     
     state = {
         name: "",
-        email: ""
-    }
+        email: "",
+    };
 
     add = (e) => {
         e.preventDefault();
         if (this.state.name === "" || this.state.email === "") {
             alert("All fields are mandatory");
-            return
+            return;
         }
         this.props.addContactHandler(this.state);
         this.setState({name: "", email: ""});
-    }
+        this.props.history.push("/");
+        
+    };
 
     render(){
     return (
@@ -37,9 +40,8 @@ class AddContact extends React.Component {
 
             </form>
         </div>
-    )
-
+    );
     }
 }
 
-export default AddContact
+export default withRouter(AddContact);
